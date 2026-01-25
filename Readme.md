@@ -33,7 +33,7 @@ Soroban stores data in the ledger as ScVal (Stellar Contract Values) within Cont
 ### **Installation**
 
 1. Clone the repository:  
-   git clone \[https://github.com/your-org/soroban-state-lens.git\](https://github.com/your-org/soroban-state-lens.git)  
+   git clone \[https://github.com/Vynix-Labs/soroban-state-lens.git\](https://github.com/Vynix-Labs/soroban-state-lens.git)  
    cd soroban-state-lens
 
 2. Install dependencies:  
@@ -61,7 +61,7 @@ The project is split into three main layers:
 
 We love contributors\! Whether you are a Rustacean who loves XDR or a Frontend dev with an eye for UX:
 
-1. Check the [Issues](https://www.google.com/search?q=https://github.com/your-org/soroban-state-lens/issues) for "Good First Issue" tags.  
+1. Check the [Issues](https://www.google.com/search?q=https://github.com/Vynix-Labs/soroban-state-lens/issues) for "Good First Issue" tags.  
 2. Fork the repo and create your branch.  
 3. Submit a PR with a detailed description of your changes.
 

@@ -1,5 +1,13 @@
 {
-  "name": "ssl",
+  "name": "soroban-state-lens",
+  "version": "0.1.0",
+  "description": "Soroban State Lens is a high-performance, open-source visual debugger and state explorer for Soroban smart contracts.",
+  "author": "Vynix-Labs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vynix-Labs/Soroban-state-lens.git"
+  },
   "private": true,
   "type": "module",
   "scripts": {
