@@ -1,3 +1,5 @@
+import { Address, xdr } from '@stellar/stellar-sdk'
+
 /**
  * ScVal normalization utilities for Soroban State Lens
  * Handles conversion of Stellar Contract Values to normalized JSON-like structures
@@ -54,7 +56,10 @@ export type NormalizedValue =
 /**
  * Creates a deterministic fallback object for unsupported ScVal variants
  */
-function createUnsupportedFallback(variant: string, rawData: unknown): UnsupportedFallback {
+function createUnsupportedFallback(
+  variant: string,
+  rawData: unknown,
+): UnsupportedFallback {
   return {
     __unsupported: true,
     variant,
@@ -66,7 +71,9 @@ function createUnsupportedFallback(variant: string, rawData: unknown): Unsupport
  * Normalizes an ScVal to a JSON-serializable format
  * Supports i32, u32, and provides fallback for unsupported variants
  */
-export function normalizeScVal(scVal: ScVal | null | undefined): NormalizedValue {
+export function normalizeScVal(
+  scVal: ScVal | null | undefined,
+): NormalizedValue {
   if (!scVal || typeof scVal.switch !== 'string') {
     return createUnsupportedFallback('Invalid', scVal)
   }
@@ -80,14 +87,24 @@ export function normalizeScVal(scVal: ScVal | null | undefined): NormalizedValue
 
     case ScValType.SCV_U32:
       // Handle u32 - ensure it's a valid 32-bit unsigned integer
-      if (typeof scVal.value === 'number' && Number.isInteger(scVal.value) && scVal.value >= 0 && scVal.value <= 0xFFFFFFFF) {
+      if (
+        typeof scVal.value === 'number' &&
+        Number.isInteger(scVal.value) &&
+        scVal.value >= 0 &&
+        scVal.value <= 0xffffffff
+      ) {
         return scVal.value
       }
       return createUnsupportedFallback(ScValType.SCV_U32, scVal.value)
 
     case ScValType.SCV_I32:
       // Handle i32 - ensure it's a valid 32-bit signed integer
-      if (typeof scVal.value === 'number' && Number.isInteger(scVal.value) && scVal.value >= -0x80000000 && scVal.value <= 0x7FFFFFFF) {
+      if (
+        typeof scVal.value === 'number' &&
+        Number.isInteger(scVal.value) &&
+        scVal.value >= -0x80000000 &&
+        scVal.value <= 0x7fffffff
+      ) {
         return scVal.value
       }
       return createUnsupportedFallback(ScValType.SCV_I32, scVal.value)
@@ -102,9 +119,8 @@ export function normalizeScVal(scVal: ScVal | null | undefined): NormalizedValue
     default:
       return createUnsupportedFallback(scVal.switch, scVal.value)
   }
-}// @ts-ignore - resolved at runtime via application bundler
+} // @ts-ignore - resolved at runtime via application bundler
 // @ts-ignore - module is provided by the runtime bundle
-import { Address, xdr } from '@stellar/stellar-sdk'
 
 export type NormalizedAddressType =
   | 'account'
@@ -126,7 +142,9 @@ export interface NormalizedAddress {
  *
  * For non-address values, this returns `null`.
  */
-export function normalizeScVal(scVal: any | null | undefined): NormalizedAddress | null {
+export function normalizeScAddress(
+  scVal: any | null | undefined,
+): NormalizedAddress | null {
   if (!scVal) {
     return null
   }
@@ -170,4 +188,3 @@ export function normalizeScVal(scVal: any | null | undefined): NormalizedAddress
     value,
   }
 }
-

@@ -2,15 +2,15 @@ import { describe, expect, it } from 'vitest'
 // @ts-ignore - module is provided by the runtime bundle
 import { Address } from '@stellar/stellar-sdk'
 
-import { normalizeScVal } from '../../workers/decoder/normalizeScVal'
+import { normalizeScAddress } from '../../workers/decoder/normalizeScVal'
 
-describe('normalizeScVal - ScAddress normalization', () => {
+describe('normalizeScAddress - ScAddress normalization', () => {
   it('converts an account ScAddress to a StrKey string', () => {
     const raw = Buffer.alloc(32, 1)
     const accountAddress = Address.account(raw)
     const scVal = accountAddress.toScVal()
 
-    const normalized = normalizeScVal(scVal)
+    const normalized = normalizeScAddress(scVal)
 
     expect(normalized).not.toBeNull()
     expect(normalized).toEqual({
@@ -25,7 +25,7 @@ describe('normalizeScVal - ScAddress normalization', () => {
     const contractAddress = Address.contract(raw)
     const scVal = contractAddress.toScVal()
 
-    const normalized = normalizeScVal(scVal)
+    const normalized = normalizeScAddress(scVal)
 
     expect(normalized).not.toBeNull()
     expect(normalized).toEqual({
