@@ -18,11 +18,10 @@ export function resolveNetworkPreset(id: string): NetworkConfig | null {
   }
 
   const sanitized = id.trim().toLowerCase()
-  const preset = DEFAULT_NETWORKS[sanitized]
 
-  if (!preset) {
+  if (!(sanitized in DEFAULT_NETWORKS)) {
     return null
   }
 
-  return { ...preset }
+  return { ...DEFAULT_NETWORKS[sanitized] }
 }
